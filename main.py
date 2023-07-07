@@ -6,9 +6,12 @@ import string
 
 def get_pass():
     alfabeto = string.ascii_letters + string.digits + string.punctuation
+    
     token1 = ''.join([secrets.choice(alfabeto) for i in range(60)])
+    input_generator['state'] = 'normal'
     input_generator.delete("1.0", END)
     input_generator.insert(END, token1)
+    input_generator['state'] = 'disabled'
         
 window = ttk.Window(themename='darkly')
 window.title("Password generator")
@@ -26,7 +29,7 @@ third_container.pack(pady=20)
 title_label = ttk.Label(first_container, text="Generator of passwords", font= 'Calibri 32 bold')
 title_label.pack()
 
-input_generator = ttk.Text(second_container, width=40, height=2)
+input_generator = ttk.Text(second_container, width=40, height=2, state='disabled')
 fonte = Font(size=20)
 input_generator.configure(font=fonte)
 input_generator.pack(side=LEFT)
